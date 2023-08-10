@@ -13,7 +13,8 @@ brew 'jq'
 brew ''
 
 # Apps
-cask 'google-chrome'
+cask 'arc'
+cask 'warp'
 cask 'slack'
 cask 'intellij-idea'
 
