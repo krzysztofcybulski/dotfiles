@@ -10,13 +10,15 @@ brew 'grep'
 brew 'jq'
 
 # Development
-brew ''
 
 # Apps
 cask 'arc'
 cask 'warp'
+cask 'spotify'
 cask 'slack'
+cask 'notion'
 cask 'intellij-idea'
+
 
 # Quicklook
 cask 'qlmarkdown'
