@@ -1,0 +1,182 @@
+{
+  "global": {
+    "ask_for_confirmation_before_quitting": true,
+    "check_for_updates_on_startup": true,
+    "show_in_menu_bar": false,
+    "show_profile_name_in_menu_bar": false,
+    "unsafe_ui": false
+  },
+  "profiles": [
+    {
+      "complex_modifications": {
+        "parameters": {
+          "basic.simultaneous_threshold_milliseconds": 50,
+          "basic.to_delayed_action_delay_milliseconds": 500,
+          "basic.to_if_alone_timeout_milliseconds": 1000,
+          "basic.to_if_held_down_threshold_milliseconds": 500,
+          "mouse_motion_to_scroll.speed": 100
+        },
+        "rules": [
+          {
+            "description": "Launch apps",
+            "manipulators": [
+              {
+                "from": {
+                  "simultaneous": [
+                    {
+                      "key_code": "f20"
+                    },
+                    {
+                      "key_code": "a"
+                    }
+                  ]
+                },
+                "to": [
+                  {
+                    "shell_command": "open '/Applications/Arc.app'"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "simultaneous": [
+                    {
+                      "key_code": "f20"
+                    },
+                    {
+                      "key_code": "b"
+                    }
+                  ]
+                },
+                "to": [
+                  {
+                    "shell_command": "open '/Applications/Bitwarden.app'"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "simultaneous": [
+                    {
+                      "key_code": "f20"
+                    },
+                    {
+                      "key_code": "n"
+                    }
+                  ]
+                },
+                "to": [
+                  {
+                    "shell_command": "open '/Applications/Notion.app'"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "simultaneous": [
+                    {
+                      "key_code": "f20"
+                    },
+                    {
+                      "key_code": "s"
+                    }
+                  ]
+                },
+                "to": [
+                  {
+                    "shell_command": "open '/Applications/Spotify.app'"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "simultaneous": [
+                    {
+                      "key_code": "f20"
+                    },
+                    {
+                      "key_code": "i"
+                    }
+                  ]
+                },
+                "to": [
+                  {
+                    "shell_command": "open '/Applications/IntelliJ IDEA.app'"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "simultaneous": [
+                    {
+                      "key_code": "f20"
+                    },
+                    {
+                      "key_code": "w"
+                    }
+                  ]
+                },
+                "to": [
+                  {
+                    "shell_command": "open '/Applications/Warp.app'"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Shift+Fn toggles touchbar",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "fn",
+                  "modifiers": {
+                    "mandatory": [
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "if [[ $(defaults read com.apple.touchbar.agent PresentationModeGlobal) == 'functionKeys' ]]; then defaults write com.apple.touchbar.agent PresentationModeGlobal 'fullControlStrip'; else defaults write com.apple.touchbar.agent PresentationModeGlobal 'functionKeys'; fi && pkill ControlStrip"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          }
+        ]
+      },
+      "devices": [],
+      "fn_function_keys": [],
+      "name": "Default profile",
+      "parameters": {
+        "delay_milliseconds_before_open_device": 1000
+      },
+      "selected": true,
+      "simple_modifications": [
+        {
+          "from": {
+            "key_code": "caps_lock"
+          },
+          "to": [
+            {
+              "key_code": "f20"
+            }
+          ]
+        }
+      ],
+      "virtual_hid_keyboard": {
+        "country_code": 0,
+        "indicate_sticky_modifier_keys_state": true,
+        "mouse_key_xy_scale": 100
+      }
+    }
+  ]
+}

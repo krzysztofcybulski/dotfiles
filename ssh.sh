@@ -13,3 +13,4 @@ ssh-add -K ~/.ssh/id_ed25519
 cat ~/.ssh/id_ed25519.pub | pbcopy
 
 echo "run 'pbcopy < ~/.ssh/id_ed25519.pub' and paste that into GitHub"
+echo "Then run ssh -T git@github.com"

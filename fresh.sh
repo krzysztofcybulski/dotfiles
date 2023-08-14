@@ -25,3 +25,7 @@ brew update
 # Install all our dependencies with bundle (See Brewfile)
 brew tap homebrew/bundle
 brew bundle --file ./Brewfile
+
+# Karabiner config
+mkdir -p ~/.config/karabiner
+ln -s karabiner.json ~/.config/karabiner.json

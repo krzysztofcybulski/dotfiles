@@ -9,6 +9,7 @@ brew 'git'
 brew 'grep'
 brew 'jq'
 brew 'links'
+brew 'bitwarden-cli'
 
 # Development
 
@@ -17,6 +18,7 @@ cask 'arc'
 cask 'warp'
 cask 'alfred'
 cask 'bitwarden'
+cask 'karabiner-elements'
 cask 'spotify'
 cask 'slack'
 cask 'notion'
