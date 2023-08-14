@@ -2,6 +2,7 @@ export EMAIL="krzysztofpcy@gmail.com"
 
 export DOTFILES=$HOME/.dotfiles
 export ZSH="$HOME/.oh-my-zsh"
+export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
 # Minimal - Theme Settings
 export MNML_INSERT_CHAR="$"
