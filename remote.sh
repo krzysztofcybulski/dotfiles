@@ -21,4 +21,11 @@ else
   echo "Installing dotfiles..."
   mkdir -p "$TARGET"
   eval "$CMD"
+  cd "$TARGET"
+  chmod +x macos.sh
+  chmod +x fresh.sh
+  chmod +x ssh.sh
+  ./macos.sh
+  ./fresh.sh
+  ./ssh.sh
 fi
