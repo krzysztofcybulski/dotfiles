@@ -5,6 +5,7 @@
 - clean: ['~']
 - link:
     ~/.config/karabiner: config/karabiner
+    ~/Library/Application Support/espanso: config/espanso
     ~/.hammerspoon: config/hammerspoon
     ~/Library/Application Support/com.mitchellh.ghostty: config/ghostty
     ~/.gitignore_global: config/git/.gitignore_global
@@ -17,7 +18,7 @@
         else
           echo "Homebrew already installed."
         fi
-      quiet: true
+      stderr: true
       description: "Installing Homebrew..."
     - 
       command: |
@@ -31,6 +32,30 @@
         /usr/libexec/PlistBuddy -c 'Set :AppleSymbolicHotKeys:64:enabled false' -c 'Set :AppleSymbolicHotKeys:65:enabled false' ~/Library/Preferences/com.apple.symbolichotkeys.plist 2>/dev/null || true; killall cfprefsd Dock SystemUIServer 2>/dev/null || true
       quiet: true
       description: "Disabling Spotlight Cmd+Space..."
+    -
+      command: |
+        # Dock remove all apps
+        defaults write com.apple.dock persistent-apps -array
+        # Dock autohide + speed
+        defaults write com.apple.dock autohide -bool true
+        defaults write com.apple.dock autohide-delay -float 0
+        defaults write com.apple.dock autohide-time-modifier -float 0.15
+        # Disable all 4 corners
+        defaults write com.apple.dock wvous-tl-corner -int 0
+        defaults write com.apple.dock wvous-tr-corner -int 0
+        defaults write com.apple.dock wvous-bl-corner -int 0
+        defaults write com.apple.dock wvous-br-corner -int 0
+        killall Dock
+
+        # Disable press-and-hold
+        defaults write -g ApplePressAndHoldEnabled -bool false
+
+        defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+        defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+        defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int
+        defaults write NSGlobalDomain _HIHideMenuBar -bool true
+        killall SystemUIServer
+      description: "Setting up MacOS settings"
     - 
       command: |
         if [ ! -d "$HOME/.nvm" ]; then
@@ -51,12 +76,38 @@
       description: "Installing Node.js..."
     - 
       command: |
-        export NVM_DIR="$HOME/.nvm"
-        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-        if ! npm list -g flowise >/dev/null 2>&1; then
-          npm install -g flowise
-        else
-          echo "flowise already installed globally."
-        fi
+        open -a "Karabiner-Elements"
+        read -p "Opened Karabiner-Elements. Press Enter to continue..." dummy
+        open -a "Raycast"
+        read -p "Opened Raycast. Press Enter to continue..." dummy
+        open -a hammerspoon
+        read -p "Opened Hammerspoon. Press Enter to continue..." dummy
+        open -a superwhisper
+        read -p "Opened Superwhisper. Press Enter to continue..." dummy
+        open -a "Hidden Bar"
+        read -p "Opened Hidden Bar. Press Enter to continue..." dummy
+        open -a "Blurred"
+        read -p "Opened Blurred. Press Enter to continue..." dummy
+        open -a espanso
+        read -p "Opened Espanso. Press Enter to continue..." dummy
+        open -a Arc --args --make-default-browser
+        read -p "Opened Arc and set as default browser. Press Enter to continue..." dummy
+        open -a Shottr
+        read -p "Opened Shottr. Press Enter to continue..." dummy
+        open -a ChatGPT
+        read -p "Opened ChatGPT. Press Enter to continue..." dummy
+        open -a Craft
+        read -p "Opened Craft. Press Enter to continue..." dummy
+        open -a Spotify
+        read -p "Opened Spotify. Press Enter to continue..." dummy
+        open -a WhatsApp
+        read -p "Opened WhatsApp. Press Enter to finish..." dummy
       stderr: true
-      description: "Installing flowise..."
+      description: "Opening apps interactively..."
+    -
+      command: |
+        gh auth login
+      stderr: true
+      stdout: true
+      stdin: true
+      description: "Logging to Github"

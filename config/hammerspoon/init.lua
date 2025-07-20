@@ -1,5 +1,5 @@
 -- [[ Global Settings ]] ------------------------------------------------------
-Hyper = { "cmd", "alt" }
+Hyper = { "cmd", "ctrl", "option", "shift" }
 
 hs.automaticallyCheckForUpdates(true)
 hs.menuIcon(true)

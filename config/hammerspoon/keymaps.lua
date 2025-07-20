@@ -11,8 +11,7 @@ local name = host.localizedName()
 ]]
 local apps = {
   a = "Arc",
-  w = "WhatsApp",
-  s = "Slack",
+  e = "WhatsApp",
   f = "Figma",
   m = "Spotify",
   w = "Ghostty",
