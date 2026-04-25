@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# JankyBorders — Tokyo Night blue accent on the focused window.
+
+options=(
+  active_color=0xff7aa2f7
+  inactive_color=0xff414868
+  width=4.0
+  style=round
+  hidpi=on
+  ax_focus=off
+)
+
+borders "${options[@]}"

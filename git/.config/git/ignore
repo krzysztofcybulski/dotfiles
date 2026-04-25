@@ -1,0 +1,51 @@
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Node
+node_modules/
+npm-debug.log
+.npm/
+.yarn/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Environments
+.env
+.env.*
+!.env.example
+
+# Build / cache
+dist/
+build/
+.cache/
+.turbo/
+.next/
+
+# Direnv
+.envrc
+.direnv/
+
+# Xcode (kept in case)
+xcuserdata/
+*.xcworkspace/xcuserdata/
+DerivedData/
+.swiftpm/

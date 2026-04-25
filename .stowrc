@@ -1,0 +1,9 @@
+--target=/Users/krzysztofc
+--ignore=README\.md
+--ignore=Brewfile
+--ignore=bootstrap\.sh
+--ignore=^\.git$
+--ignore=^\.gitignore$
+--ignore=^\.stowrc$
+--ignore=^scripts$
+--ignore=^macos$

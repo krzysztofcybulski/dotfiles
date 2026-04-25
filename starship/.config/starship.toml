@@ -1,0 +1,81 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Tokyo Night palette, trimmed to the modules I actually look at.
+format = """
+[](fg:#7aa2f7)\
+$directory\
+[](fg:#7aa2f7 bg:#3b4261)\
+$git_branch\
+$git_status\
+[](fg:#3b4261 bg:#1a1b26)\
+$cmd_duration\
+[ ](fg:#1a1b26)\
+$character"""
+
+add_newline = true
+command_timeout = 1000
+
+[character]
+success_symbol = "[❯](bold #9ece6a)"
+error_symbol   = "[❯](bold #f7768e)"
+vimcmd_symbol  = "[❮](bold #7aa2f7)"
+
+[directory]
+style = "fg:#1a1b26 bg:#7aa2f7 bold"
+format = "[ $path ]($style)"
+truncation_length = 4
+truncation_symbol = "…/"
+read_only = " "
+read_only_style = "fg:#f7768e bg:#7aa2f7"
+
+[directory.substitutions]
+"Documents" = "󰈙"
+"Downloads" = ""
+"Music"     = ""
+"Pictures"  = ""
+"Projects"  = ""
+
+[git_branch]
+symbol = " "
+style  = "fg:#c0caf5 bg:#3b4261"
+format = "[ $symbol$branch ]($style)"
+
+[git_status]
+style    = "fg:#f7768e bg:#3b4261"
+format   = "[$all_status$ahead_behind ]($style)"
+ahead    = "⇡${count}"
+behind   = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+modified = " "
+staged   = " "
+untracked = " "
+deleted  = " "
+
+[cmd_duration]
+min_time = 2_000
+style    = "fg:#e0af68 bg:#1a1b26"
+format   = "[ 󰔚 $duration ]($style)"
+
+# Quiet everything else by default
+[aws]       disabled = true
+[azure]     disabled = true
+[battery]   disabled = true
+[bun]       disabled = true
+[c]         disabled = true
+[deno]      disabled = true
+[docker_context] disabled = true
+[gcloud]    disabled = true
+[golang]    disabled = true
+[hostname]  disabled = true
+[java]      disabled = true
+[kubernetes] disabled = true
+[lua]       disabled = true
+[nodejs]    disabled = true
+[package]   disabled = true
+[python]    disabled = true
+[ruby]      disabled = true
+[rust]      disabled = true
+[swift]     disabled = true
+[terraform] disabled = true
+[time]      disabled = true
+[username]  disabled = true

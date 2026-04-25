@@ -1,0 +1,141 @@
+# AeroSpace config — i3-style tiling.
+# Hyper = cmd+ctrl+alt+shift, produced by holding Caps Lock (see Karabiner).
+
+start-at-login = true
+after-login-command = []
+
+after-startup-command = [
+  'exec-and-forget borders',
+  'exec-and-forget sketchybar'
+]
+
+# Notify SketchyBar on every workspace change.
+exec-on-workspace-change = ['/bin/bash', '-c',
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE'
+]
+
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+accordion-padding = 30
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+automatically-unhide-macos-hidden-apps = true
+
+[gaps]
+inner.horizontal = 8
+inner.vertical = 8
+outer.left = 8
+outer.bottom = 8
+outer.top = 40   # leaves space for SketchyBar
+outer.right = 8
+
+# ============================================================================
+# Main mode bindings — Hyper layer
+# ============================================================================
+[mode.main.binding]
+# Focus
+cmd-ctrl-alt-shift-h = 'focus left'
+cmd-ctrl-alt-shift-j = 'focus down'
+cmd-ctrl-alt-shift-k = 'focus up'
+cmd-ctrl-alt-shift-l = 'focus right'
+
+# Workspaces (numbered 1-5)
+cmd-ctrl-alt-shift-1 = 'workspace 1'
+cmd-ctrl-alt-shift-2 = 'workspace 2'
+cmd-ctrl-alt-shift-3 = 'workspace 3'
+cmd-ctrl-alt-shift-4 = 'workspace 4'
+cmd-ctrl-alt-shift-5 = 'workspace 5'
+cmd-ctrl-alt-shift-tab = 'workspace-back-and-forth'
+
+# Layout
+cmd-ctrl-alt-shift-slash = 'layout tiles horizontal vertical'
+cmd-ctrl-alt-shift-comma = 'layout accordion horizontal vertical'
+cmd-ctrl-alt-shift-f     = 'fullscreen'
+cmd-ctrl-alt-shift-space = 'layout floating tiling'
+
+# Move/resize entry — submodes
+# Note: 'v' (not 'm') because Karabiner steals Hyper+M for Spotify launcher.
+cmd-ctrl-alt-shift-v = 'mode move'
+cmd-ctrl-alt-shift-r = 'mode resize'
+
+# Reload
+cmd-ctrl-alt-shift-semicolon = 'reload-config'
+
+# ============================================================================
+# Move submode — Hyper+M then h/j/k/l/1-5
+# ============================================================================
+[mode.move.binding]
+h = 'move left'
+j = 'move down'
+k = 'move up'
+l = 'move right'
+
+1 = ['move-node-to-workspace 1', 'mode main']
+2 = ['move-node-to-workspace 2', 'mode main']
+3 = ['move-node-to-workspace 3', 'mode main']
+4 = ['move-node-to-workspace 4', 'mode main']
+5 = ['move-node-to-workspace 5', 'mode main']
+
+enter = 'mode main'
+esc   = 'mode main'
+
+# ============================================================================
+# Resize submode — Hyper+R then h/j/k/l
+# ============================================================================
+[mode.resize.binding]
+h = 'resize width -50'
+j = 'resize height +50'
+k = 'resize height -50'
+l = 'resize width +50'
+
+equal = 'balance-sizes'
+
+enter = 'mode main'
+esc   = 'mode main'
+
+# ============================================================================
+# Window rules
+# ============================================================================
+
+# Float small / utility windows
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.1password.1password'
+if.window-title-regex-substring = 'Quick Access'
+run = 'layout floating'
+
+# Arc Little Arc popup
+[[on-window-detected]]
+if.app-id = 'company.thebrowser.Browser'
+if.window-title-regex-substring = '^Little'
+run = 'layout floating'
+
+# Workspace assignments
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = 'move-node-to-workspace 4'
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-id = 'desktop.WhatsApp'
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-id = 'com.todesktop.230313mzl4w4u92'   # Cursor
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = 'move-node-to-workspace 2'

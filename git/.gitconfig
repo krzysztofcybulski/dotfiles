@@ -1,0 +1,57 @@
+[user]
+	name = Krzysztof Cybulski
+	email = krzysztofpcy@gmail.com
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = true
+
+[push]
+	default = current
+	autoSetupRemote = true
+
+[fetch]
+	prune = true
+
+[rebase]
+	autoStash = true
+
+[merge]
+	conflictstyle = zdiff3
+
+[diff]
+	algorithm = histogram
+	colorMoved = default
+
+[core]
+	pager = delta
+	excludesfile = ~/.config/git/ignore
+	editor = cursor --wait
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	light = false
+	side-by-side = true
+	line-numbers = true
+	syntax-theme = tokyonight_night
+
+[color]
+	ui = auto
+
+[alias]
+	st = status -sb
+	co = checkout
+	br = branch
+	ci = commit
+	lg = log --oneline --graph --decorate --all
+	last = log -1 HEAD
+	unstage = reset HEAD --
+	amend = commit --amend --no-edit
+
+[includeIf "gitdir:~/netflix/"]
+	path = ~/.config/git/config-netflix

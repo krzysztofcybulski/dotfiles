@@ -1,0 +1,108 @@
+{
+    "global": {
+        "ask_for_confirmation_before_quitting": false,
+        "show_in_menu_bar": false
+    },
+    "profiles": [
+        {
+            "name": "Default profile",
+            "selected": true,
+            "virtual_hid_keyboard": { "keyboard_type_v2": "iso" },
+            "complex_modifications": {
+                "parameters": {
+                    "basic.simultaneous_threshold_milliseconds": 50,
+                    "basic.to_if_alone_timeout_milliseconds": 200,
+                    "basic.to_if_held_down_threshold_milliseconds": 200
+                },
+                "rules": [
+                    {
+                        "description": "Caps Lock: hold = Hyper (cmd+ctrl+opt+shift), tap = F18 (triggers Spokenly)",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "modifiers": ["left_command", "left_control", "left_option"]
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    { "key_code": "f18" }
+                                ],
+                                "parameters": {
+                                    "basic.to_if_alone_timeout_milliseconds": 200,
+                                    "basic.to_if_held_down_threshold_milliseconds": 200
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Hyper + letter: app launchers (A=Arc, W=Ghostty, S=Slack, C=Cursor, D=Craft, E=WhatsApp, M=Spotify)",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "a",
+                                    "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
+                                },
+                                "to": [{ "shell_command": "open -a 'Arc'" }]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "w",
+                                    "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
+                                },
+                                "to": [{ "shell_command": "open -a 'Ghostty'" }]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "s",
+                                    "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
+                                },
+                                "to": [{ "shell_command": "open -a 'Slack'" }]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "c",
+                                    "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
+                                },
+                                "to": [{ "shell_command": "open -a 'Cursor'" }]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
+                                },
+                                "to": [{ "shell_command": "open -a 'Craft'" }]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "e",
+                                    "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
+                                },
+                                "to": [{ "shell_command": "open -a 'WhatsApp'" }]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "m",
+                                    "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
+                                },
+                                "to": [{ "shell_command": "open -a 'Spotify'" }]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

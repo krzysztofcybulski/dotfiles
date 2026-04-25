@@ -1,0 +1,75 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run lint:*)",
+      "Bash(npm run test:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run dev:*)",
+      "Bash(bun run:*)",
+      "Bash(bun test:*)",
+      "Bash(bun install:*)",
+      "Bash(bun add:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git status:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git stash:*)",
+      "Bash(rg:*)",
+      "Bash(fd:*)",
+      "Bash(eza:*)",
+      "Bash(bat:*)",
+      "Bash(jq:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh issue view:*)",
+      "Bash(gh issue list:*)",
+      "Read",
+      "Glob",
+      "Grep"
+    ],
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(git rebase:*)",
+      "Bash(git reset:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr merge:*)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Read(**/credentials.json)",
+      "Read(**/*.pem)",
+      "Bash(rm -rf:*)",
+      "Bash(curl * | sh:*)",
+      "Bash(curl * | bash:*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "FILE=\"$(jq -r '.tool_input.file_path // empty' <<< \"$CLAUDE_HOOK_INPUT\")\"; [ -n \"$FILE\" ] && [ -f \"$(dirname \"$FILE\")/package.json\" -o -f \"$(git rev-parse --show-toplevel 2>/dev/null)/package.json\" ] && command -v prettier >/dev/null && prettier --write \"$FILE\" 2>/dev/null || true"
+          },
+          {
+            "type": "command",
+            "command": "FILE=\"$(jq -r '.tool_input.file_path // empty' <<< \"$CLAUDE_HOOK_INPUT\")\"; [ -n \"$FILE\" ] && [ -f \"$(git rev-parse --show-toplevel 2>/dev/null)/pyproject.toml\" ] && command -v ruff >/dev/null && ruff format \"$FILE\" 2>/dev/null || true"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "INPUT=$(cat); CMD=$(jq -r '.tool_input.command // empty' <<< \"$INPUT\"); OUT=$(jq -r '.tool_response.stdout // empty' <<< \"$INPUT\"); MP3=\"$HOME/.local/share/musictags/straighttoprod.mp3\"; echo \"$CMD\" | grep -qE '(^|[^a-zA-Z0-9_-])gh +pr +create([^a-zA-Z0-9_-]|$)' && echo \"$OUT\" | grep -qE 'https?://github\\.com/[^[:space:]]+/pull/[0-9]+' && [ -f \"$MP3\" ] && (nohup afplay \"$MP3\" >/dev/null 2>&1 &) ; exit 0"
+          }
+        ]
+      }
+    ]
+  }
+}
